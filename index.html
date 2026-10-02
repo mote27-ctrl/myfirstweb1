@@ -243,12 +243,23 @@ body{
   width:100%;
   max-width:520px;
   margin:0 auto;
+  position:relative;
+  overflow:hidden;
+  border-radius:16px;
 }
 .hero-img img{
   width:100%;
   height:auto;
   display:block;
-  border-radius:16px;
+  position:absolute;
+  top:0;
+  left:0;
+  opacity:0;
+  transition:opacity 0.7s ease;
+}
+.hero-img img.active{
+  position:relative;
+  opacity:1;
 }
 .section{
   padding:80px 0;
@@ -521,8 +532,11 @@ footer{
       <h1>陌音コポ</h1>
       <div class="sub">OFFICIAL WEBSITE</div>
     </div>
-    <div class="hero-img">
-      <img src="https://i.imgs.ovh/2026/09/25/c02b7b654f4a1ffaf1fc5516f840a832.png" alt="陌音コポ 立绘">
+    <div class="hero-img" id="heroSlider">
+      <img class="active" src="https://i.imgs.ovh/2026/09/25/c02b7b654f4a1ffaf1fc5516f840a832.png" alt="陌音コポ 立绘">
+      <img src="https://i.imgs.ovh/2026/09/26/5370575fe130411ea9a9f96c78437533.png" alt="陌音コポ 立绘">
+      <img src="https://i.imgs.ovh/2026/10/02/8bbdfbec9d5858b27d36a494c95b4adf.png" alt="陌音コポ 立绘">
+      <img src="https://i.imgs.ovh/2026/10/02/37292d582919ea653de414d543174174.png" alt="陌音コポ 立绘">
     </div>
   </section>
 
@@ -577,6 +591,14 @@ footer{
 
     <div class="illust-block">
       <img src="https://i.imgs.ovh/2026/09/26/5370575fe130411ea9a9f96c78437533.png" alt="陌音コポ 官方立绘">
+      <p class="illust-caption">Illustration provided by Dyedawn</p>
+    </div>
+    <div class="illust-block">
+      <img src="https://i.imgs.ovh/2026/10/02/8bbdfbec9d5858b27d36a494c95b4adf.png" alt="陌音コポ 官方立绘">
+      <p class="illust-caption">Illustration provided by Dyedawn</p>
+    </div>
+    <div class="illust-block">
+      <img src="https://i.imgs.ovh/2026/10/02/37292d582919ea653de414d543174174.png" alt="陌音コポ 官方立绘">
       <p class="illust-caption">Illustration provided by Dyedawn</p>
     </div>
   </section>
@@ -639,6 +661,16 @@ window.addEventListener("scroll", ()=>{
     backTopBtn.classList.remove("show");
   }
 })
+
+// Hero头部立绘自动轮播，4秒切换一次，淡入淡出
+const sliderImgs = document.querySelectorAll("#heroSlider img");
+let curIndex = 0;
+function slideLoop(){
+    sliderImgs[curIndex].classList.remove("active");
+    curIndex = (curIndex + 1) % sliderImgs.length;
+    sliderImgs[curIndex].classList.add("active");
+}
+setInterval(slideLoop,4000);
 </script>
 
 </body>
